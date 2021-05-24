@@ -1,6 +1,20 @@
 import React from 'react';
 import './style.css';
 import { useFormik } from 'formik';
+import * as yup from 'yup';
+
+const validationSchema = yup.object().shape({
+  firstName: yup
+    .string()
+    .required('First name is required.')
+    .min(3, 'Minimum 3 characters required'),
+  lastName: yup.string().required('Last name is required'),
+  emailId: yup
+    .string()
+    .required('Email ID is required')
+    .email('Enter valid email id'),
+  mobileNumber: yup.number()
+});
 
 export default function App() {
   const formik = useFormik({
@@ -17,7 +31,8 @@ export default function App() {
         'Registration Form Submitted \n ' + JSON.stringify(values, null, 2)
       );
       formik.resetForm();
-    }
+    },
+    validationSchema: validationSchema
   });
 
   return (
@@ -27,15 +42,26 @@ export default function App() {
         <form onSubmit={formik.handleSubmit}>
           <div class="form-group">
             <label> First Name </label>
-            <input type="text" {...formik.getFieldProps('firstName')} />
+            <div>
+              <input type="text" {...formik.getFieldProps('firstName')} />
+              {formik.touched.firstName && (
+                <div class="text-error">{formik.errors.firstName}</div>
+              )}
+            </div>
           </div>
           <div class="form-group">
             <label> Last Name </label>
-            <input type="text" {...formik.getFieldProps('lastName')} />
+            <div>
+              <input type="text" {...formik.getFieldProps('lastName')} />
+              <div class="text-error">{formik.errors.lastName}</div>
+            </div>
           </div>
           <div class="form-group">
             <label> Email Id </label>
-            <input type="text" {...formik.getFieldProps('emailId')} />
+            <div>
+              <input type="text" {...formik.getFieldProps('emailId')} />
+              <div class="text-error">{formik.errors.emailId}</div>
+            </div>
           </div>
           <div class="form-group">
             <label> Mobile Number </label>

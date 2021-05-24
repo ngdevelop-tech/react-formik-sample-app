@@ -25,6 +25,7 @@ textarea {
   padding: 5px;
   border-radius: 0px;
   border: 1px solid black;
+  width: 100%;
 }
 
 button {
@@ -34,4 +35,7 @@ button {
 }
 .btn-primary {
   background: lightblue;
+}
+.text-error {
+  color: red;
 }
