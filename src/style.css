@@ -1,0 +1,37 @@
+* {
+  font-family: Lato;
+}
+
+.root {
+  padding: 0px 10px;
+  display: grid;
+}
+
+@media screen and (min-width: 800px) {
+  .root {
+    grid-template-columns: 50% 50%;
+  }
+}
+
+.form-group {
+  display: grid;
+  grid-template-columns: 30% 50%;
+  margin: 10px 0px;
+}
+
+input,
+select,
+textarea {
+  padding: 5px;
+  border-radius: 0px;
+  border: 1px solid black;
+}
+
+button {
+  margin-right: 5px;
+  padding: 10px;
+  border: none;
+}
+.btn-primary {
+  background: lightblue;
+}
