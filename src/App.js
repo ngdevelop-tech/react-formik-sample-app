@@ -35,6 +35,15 @@ export default function App() {
     validationSchema: validationSchema
   });
 
+  const renderErrorMessage = field => {
+    return (
+      formik.touched[field] && (
+        <div class="text-error">{formik.errors[field]}</div>
+      )
+    );
+  };
+
+  console.log(formik);
   return (
     <div class="root">
       <div class="form">
@@ -44,23 +53,21 @@ export default function App() {
             <label> First Name </label>
             <div>
               <input type="text" {...formik.getFieldProps('firstName')} />
-              {formik.touched.firstName && (
-                <div class="text-error">{formik.errors.firstName}</div>
-              )}
+              {renderErrorMessage('firstName')}
             </div>
           </div>
           <div class="form-group">
             <label> Last Name </label>
             <div>
               <input type="text" {...formik.getFieldProps('lastName')} />
-              <div class="text-error">{formik.errors.lastName}</div>
+              {renderErrorMessage('lastName')}
             </div>
           </div>
           <div class="form-group">
             <label> Email Id </label>
             <div>
               <input type="text" {...formik.getFieldProps('emailId')} />
-              <div class="text-error">{formik.errors.emailId}</div>
+              {renderErrorMessage('emailId')}
             </div>
           </div>
           <div class="form-group">
@@ -95,9 +102,19 @@ export default function App() {
       </div>
       <div class="form-state">
         <h4>Form State</h4>
-        <h5>Values:</h5>
+        <h5>Dirty: {JSON.stringify(formik.dirty)}</h5>
+        <h5>isValid: {JSON.stringify(formik.isValid)}</h5>
+        <h5>values:</h5>
         <code>
           <pre>{JSON.stringify(formik.values, null, 2)}</pre>
+        </code>
+        <h5>Errors:</h5>
+        <code>
+          <pre>{JSON.stringify(formik.errors, null, 2)}</pre>
+        </code>
+        <h5>Touched:</h5>
+        <code>
+          <pre>{JSON.stringify(formik.touched, null, 2)}</pre>
         </code>
       </div>
     </div>
